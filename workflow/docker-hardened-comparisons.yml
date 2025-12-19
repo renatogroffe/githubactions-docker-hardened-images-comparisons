@@ -1,0 +1,59 @@
+name: docker-hardened-comparisons
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+env:
+  COMMON_IMAGE: 'python:3.13'
+  DOCKER_HARDENED_IMAGE: 'dhi.io/python:3.13'
+  #COMMON_IMAGE: 'mcr.microsoft.com/dotnet/sdk:10.0.101'
+  #DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
+  #COMMON_IMAGE: 'node:24'
+  #DOCKER_HARDENED_IMAGE: 'dhi.io/node:24'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Login to the Docker Hardened Images registry -- Login no registry do Docker Hardened Images
+        uses: docker/login-action@v3.6.0
+        with:
+          registry: dhi.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PAT }}
+          
+      - name: Download common image -- Baixar imagem convencional
+        run: docker pull ${{ env.COMMON_IMAGE }}
+
+      - name: Download hardened image -- Baixar imagem hardened
+        run: docker pull ${{ env.DOCKER_HARDENED_IMAGE }}
+        
+      - name: Display images in the environment -- Exibir imagens no ambiente
+        run: docker images
+
+      - name: Login to Docker Hub (to use the docker scout utility) -- Login no Docker Hub (para uso do utilitario docker scout)
+        uses: docker/login-action@v3.6.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PAT }}
+          
+      - name: Install Docker Scout -- Instalar o docker scout
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+          sh install-scout.sh
+
+      - name: Testing the Docker Scout installation -- Testar instalacao do Docker Scout
+        run: docker scout
+
+      - name: Perform a comparison between images -- Executar comparativo entre imagens
+        run: |
+          docker scout compare ${{ env.DOCKER_HARDENED_IMAGE }} \
+              --to ${{ env.COMMON_IMAGE }} \
+              --platform linux/amd64 \
+              --ignore-unchanged
