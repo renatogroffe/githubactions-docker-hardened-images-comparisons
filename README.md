@@ -5,6 +5,6 @@ Workflow do GitHub Actions para testes comparando a segurança de imagens conven
 
 ## Testes
 
-Exemplo de execuçao do workflow com imagens do **Python 13**:
+Exemplo de execuçao do workflow com imagens do **Python 3.13**:
 
 ![Python](img/hardened-01.png)
