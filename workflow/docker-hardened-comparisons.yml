@@ -15,6 +15,8 @@ env:
   #DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
   #COMMON_IMAGE: 'node:24'
   #DOCKER_HARDENED_IMAGE: 'dhi.io/node:24'
+  #COMMON_IMAGE: 'golang:1.24'
+  #DOCKER_HARDENED_IMAGE: 'dhi.io/golang:1.24'
 
 jobs:
   build:
