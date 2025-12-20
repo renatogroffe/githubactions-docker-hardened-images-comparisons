@@ -16,3 +16,7 @@ Exemplo de execuçao do workflow com imagens do **.NET 10**:
 Exemplo de execuçao do workflow com imagens do **Node 24**:
 
 ![Node 24](img/hardened-03.png)
+
+Exemplo de execuçao do workflow com imagens do **Go 1.24**:
+
+![Node 24](img/hardened-04.png)
