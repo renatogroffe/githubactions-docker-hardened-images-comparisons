@@ -12,3 +12,7 @@ Exemplo de execuçao do workflow com imagens do **Python 3.13**:
 Exemplo de execuçao do workflow com imagens do **.NET 10**:
 
 ![.NET 10](img/hardened-02.png)
+
+Exemplo de execuçao do workflow com imagens do **Node 24**:
+
+![Node 24](img/hardened-03.png)
