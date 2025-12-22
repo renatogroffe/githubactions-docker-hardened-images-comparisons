@@ -53,33 +53,9 @@ jobs:
       - name: Testing the Docker Scout installation -- Testar instalacao do Docker Scout
         run: docker scout
 
-      - name: Display options for the *docker scout compare* command. -- Exibir opcoes para o comando *docker scout compare*
-        run: docker scout compare --help
-
       - name: Perform a comparison between images -- Executar comparativo entre imagens
         run: |
           docker scout compare ${{ env.DOCKER_HARDENED_IMAGE }} \
               --to ${{ env.COMMON_IMAGE }} \
               --platform linux/amd64 \
               --ignore-unchanged
-        
-      - name: Perform image comparisons and export results to Markdown -- Executar comparativo entre imagens exportando resultados para Markdown
-        run: |
-          docker scout compare ${{ env.DOCKER_HARDENED_IMAGE }} \
-              --to ${{ env.COMMON_IMAGE }} \
-              --format markdown --output scan-image.md \
-              --platform linux/amd64 \
-              --ignore-unchanged
-
-      - name: Display files in the root directory after running Docker Scout -- Exibir arquivos no diretorio-raiz apos execucao do Docker Scout
-        run: |
-          pwd
-          echo
-          ls -l
-          
-      - name: Perform a comparison between images -- Executar comparativo entre imagens
-        uses: dtinth/markdown-report-action@v1
-        with:
-          name: 'Docker Hardened Image x Common Image'
-          title: 'Docker Hardened Image x Common Image'
-          body-file: 'scan-image.md'
