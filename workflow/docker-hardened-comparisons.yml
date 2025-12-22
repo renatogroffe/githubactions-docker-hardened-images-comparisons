@@ -9,10 +9,10 @@ on:
   workflow_dispatch:
 
 env:
-  COMMON_IMAGE: 'python:3.13'
-  DOCKER_HARDENED_IMAGE: 'dhi.io/python:3.13'
-  #COMMON_IMAGE: 'mcr.microsoft.com/dotnet/sdk:10.0.101'
-  #DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
+  #COMMON_IMAGE: 'python:3.13'
+  #DOCKER_HARDENED_IMAGE: 'dhi.io/python:3.13'
+  COMMON_IMAGE: 'mcr.microsoft.com/dotnet/sdk:10.0.101'
+  DOCKER_HARDENED_IMAGE: 'dhi.io/dotnet:10.0.101-sdk'
   #COMMON_IMAGE: 'node:24'
   #DOCKER_HARDENED_IMAGE: 'dhi.io/node:24'
   #COMMON_IMAGE: 'golang:1.24'
@@ -77,7 +77,7 @@ jobs:
           echo
           ls -l
           
-      - name: Perform a comparison between images -- Executar comparativo entre imagens
+      - name: Publication of Markdown report -- Publicacao de relatorio Markdown
         uses: dtinth/markdown-report-action@v1
         with:
           name: 'Docker Hardened Image x Common Image'
